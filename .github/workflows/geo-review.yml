@@ -1,0 +1,44 @@
+name: Review geo database updates
+on:
+  schedule:
+    - cron: '23 4 * * *'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: geo-database-review
+  cancel-in-progress: false
+jobs:
+  propose:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - name: Check and prepare candidate
+        run: python3 scripts/check_geo_updates.py
+      - name: Open review PR, never merge
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          if git diff --quiet -- HAPP/WHITELIST.json HAPP/DEFAULT.json; then
+            echo "No update needed." >> "$GITHUB_STEP_SUMMARY"
+            exit 0
+          fi
+          if gh pr list --base main --state open --limit 100 --json headRefName --jq '.[].headRefName' | grep -q '^geo-review/'; then
+            echo "An existing geo review PR is open. Review it first." >> "$GITHUB_STEP_SUMMARY"
+            exit 0
+          fi
+          branch="geo-review/${GITHUB_RUN_ID}"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git switch -c "$branch"
+          git add HAPP/WHITELIST.json HAPP/DEFAULT.json
+          git commit -m "Propose updated Happ GeoIP and GeoSite versions"
+          git push origin "HEAD:refs/heads/$branch"
+          gh pr create --base main --head "$branch" --title "Review Happ geo database update" --body "Candidate versions from RoscomVPN. Download and category checks passed. Review the logs and test both Happ profiles before merging. INCY, DNS and routing rules are unchanged. No automatic merge."
