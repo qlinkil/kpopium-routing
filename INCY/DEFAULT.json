@@ -1,5 +1,5 @@
 {
-  "Name": "Kpopium Default",
+  "Name": "Kpopium Default — AI test",
   "GlobalProxy": "true",
   "UseChunkFiles": "true",
   "RemoteDns": "8.8.8.8",
@@ -39,7 +39,22 @@
     "geosite:telegram",
     "geosite:github",
     "geosite:google-play",
-    "geosite:twitch-ads"
+    "geosite:twitch-ads",
+    "domain:anthropic.com",
+    "domain:claude.ai",
+    "domain:claude.com",
+    "domain:claudeusercontent.com",
+    "domain:claudemcpcontent.com",
+    "domain:openai.com",
+    "domain:chatgpt.com",
+    "domain:oaistatic.com",
+    "domain:oaiusercontent.com",
+    "domain:oaistatsig.com",
+    "domain:openaimerge.com",
+    "domain:gemini.google.com",
+    "domain:aistudio.google.com",
+    "domain:generativelanguage.googleapis.com",
+    "domain:aiplatform.googleapis.com"
   ],
   "ProxyIp": [],
   "BlockSites": [
