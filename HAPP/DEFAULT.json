@@ -10,7 +10,7 @@
   "DomesticDNSType": "DoH",
   "DomesticDNSDomain": "https://77.88.8.8/dns-query",
   "DomesticDNSIP": "77.88.8.8",
-  "LastUpdated": "1795737600",
+  "LastUpdated": "1795737601",
   "DnsHosts": {
     "lkfl2.nalog.ru": "213.24.64.175",
     "lknpd.nalog.ru": "213.24.64.181"
@@ -39,7 +39,22 @@
     "geosite:telegram",
     "geosite:github",
     "geosite:google-play",
-    "geosite:twitch-ads"
+    "geosite:twitch-ads",
+    "domain:anthropic.com",
+    "domain:claude.ai",
+    "domain:claude.com",
+    "domain:claudeusercontent.com",
+    "domain:claudemcpcontent.com",
+    "domain:openai.com",
+    "domain:chatgpt.com",
+    "domain:oaistatic.com",
+    "domain:oaiusercontent.com",
+    "domain:oaistatsig.com",
+    "domain:openaimerge.com",
+    "domain:gemini.google.com",
+    "domain:aistudio.google.com",
+    "domain:generativelanguage.googleapis.com",
+    "domain:aiplatform.googleapis.com"
   ],
   "ProxyIp": [],
   "BlockSites": [
